@@ -22,7 +22,7 @@ $(document).ready(function(){
     var links = [];
     var hashes = [];
     if(location.href.match('/pull/[0-9]+')){
-        $.each($('table.commits'), function(idx, el){
+        $.each($('table.commits tr'), function(idx, el){
             el = $(el);
             var shortlink = el.find('.commit a')[0];
             links.push(shortlink);
