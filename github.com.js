@@ -34,6 +34,13 @@ $(document).ready(function(){
         var top_el = $('#files');
         bottom_el.html(markup + bottom_el.html());
         top_el.html(markup + top_el.html());
+
+        $.each($('form'), function(idx, el){
+            el = $(el);
+            if(el.attr('action') && el.attr('action').match('commit_comment')){
+                el.attr('action', el.attr('action') + location.search);
+            }
+        });
     }
 
 });
