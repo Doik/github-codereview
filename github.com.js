@@ -1,3 +1,19 @@
+
+
+function getUrlVars() {
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    console.log(vars);
+    return vars;
+}
+
+
+
 $(document).ready(function(){
 
     // var timetag = $('body.page-commit-show time.js-relative-date');
@@ -11,14 +27,17 @@ $(document).ready(function(){
             hashes.push($(el).text());
         });
         var hashstr = '?hashes=' + hashes.join(',');
-
+        //strip https://github.com
+        hashstr += '&pullrequest=' + location.href.substr(18);
         $.each(links, function(idx, el){
             el.href = el.href + hashstr;
         });
+
     }
 
     if(location.href.match('/commit/') && location.search.match('hashes=')){
-        hashes = location.search.substr(8).split(',');
+        var vars = getUrlVars();
+        hashes = vars['hashes'].split(',');
         var current_commit = $('.full-commit .commit-meta.clearfix .sha-block span.sha').text().substr(0, hashes[0].length);
         var idx = hashes.indexOf(current_commit);
         var prev = '';
@@ -29,7 +48,8 @@ $(document).ready(function(){
         if(idx < hashes.length - 1){
             next = '<a href="../commit/' + hashes[idx+1] + location.search + '" class="minibutton" style="float: right;">go to next commit &gt;</a>';
         }
-        var markup = '<div class="margin: 1em 0;">' + prev + next + '<p style="margin: 0; clear:both">&nbsp;</p></div>';
+        var up = '<a href="' + vars['pullrequest'] + '" class="minibutton" style="text-align: center; display:block; width: 10em; margin: 0 auto;">back to pullrequest</a>';
+        var markup = '<div class="margin: 1em 0; text-align:center;">' + prev + next + up +  '<p style="margin: 0; clear:both">&nbsp;</p></div>';
         var bottom_el = $('#all_commit_comments');
         var top_el = $('#files');
         bottom_el.html(markup + bottom_el.html());
