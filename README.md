@@ -6,6 +6,7 @@ github-codereview
 This will add ``next commit``, ``previous commit``, ``back to pull request`` links to the site if you're reviewing a pull request. 
 
 Basically, if you visit the overview of the pull request, it will add an array of all commit hashes to all links that point to single commits. If you follow one of the links, it will obtain the next and previous commit hashes from this array. It's not very elegant, but it does the job ;)   
+TODO: Use github json API for less hacky-data-retrieval
 
 How to install
 =================
