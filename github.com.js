@@ -22,9 +22,12 @@ $(document).ready(function(){
     var links = [];
     var hashes = [];
     if(location.href.match('/pull/[0-9]+')){
-        $.each($('table.commits .commit a'), function(idx, el){
-            links.push(el);
-            hashes.push($(el).text());
+        $.each($('table.commits'), function(idx, el){
+            el = $(el);
+            var shortlink = el.find('.commit a')[0];
+            links.push(shortlink);
+            links.push(el.find('.message a')[0]);
+            hashes.push(shortlink.text);
         });
         var hashstr = '?hashes=' + hashes.join(',');
         //strip https://github.com
