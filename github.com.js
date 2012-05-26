@@ -26,7 +26,7 @@ $(document).ready(function(){
         if(idx > 0){
             prev = '<a href="../commit/' + hashes[idx-1] + location.search + '" class="minibutton" style="float: left;">&lt; go to previous commit</a>';
         }
-        if(idx < hashes.length){
+        if(idx < hashes.length - 1){
             next = '<a href="../commit/' + hashes[idx+1] + location.search + '" class="minibutton" style="float: right;">go to next commit &gt;</a>';
         }
         var markup = '<div class="margin: 1em 0;">' + prev + next + '<p style="margin: 0; clear:both">&nbsp;</p></div>';
