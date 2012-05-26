@@ -29,7 +29,7 @@ $(document).ready(function(){
         if(idx < hashes.length){
             next = '<a href="../commit/' + hashes[idx+1] + location.search + '" class="minibutton" style="float: right;">go to next commit &gt;</a>';
         }
-        var markup = '<p>' + prev + next + '</p><p style="clear:both"></p>';
+        var markup = '<div class="margin: 1em 0;">' + prev + next + '<p style="margin: 0; clear:both">&nbsp;</p></div>';
         var bottom_el = $('#all_commit_comments');
         var top_el = $('#files');
         bottom_el.html(markup + bottom_el.html());
