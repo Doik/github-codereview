@@ -8,7 +8,6 @@ function getUrlVars() {
         vars.push(hash[0]);
         vars[hash[0]] = hash[1];
     }
-    console.log(vars);
     return vars;
 }
 
@@ -22,16 +21,15 @@ $(document).ready(function(){
     var links = [];
     var hashes = [];
     if(location.href.match('/pull/[0-9]+')){
-        $.each($('table.commits tr'), function(idx, el){
+        $.each($('#commits_bucket table.commits tr'), function(idx, el){
             el = $(el);
             var shortlink = el.find('.commit a')[0];
-            links.push(shortlink);
-            links.push(el.find('.message a')[0]);
             hashes.push(shortlink.text);
         });
         var hashstr = '?hashes=' + hashes.join(',');
         //strip https://github.com
         hashstr += '&pullrequest=' + location.href.substr(18);
+        links = $('table.commits tr .commit a').extend($('table.commits tr .message a'));
         $.each(links, function(idx, el){
             el.href = el.href + hashstr;
         });
