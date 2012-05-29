@@ -52,7 +52,7 @@ $(document).ready(function(){
             next = '<a href="../commit/' + hashes[idx+1] + location.search + '" class="minibutton" style="float: right;">go to next commit &gt;</a>';
         }
         var up = '<a href="' + vars['pullrequest'] + '" class="minibutton" style="text-align: center; display:block; width: 10em; margin: 0 auto;">back to pullrequest</a>';
-        var markup = '<div class="margin: 1em 0; text-align:center;">' + prev + next + up +  '<p style="margin: 0; clear:both">&nbsp;</p></div>';
+        var markup = '<div style="margin: 1em 0; text-align:center;">' + prev + next + up +  '<p style="margin: 0; clear:both">&nbsp;</p></div>';
         var bottom_el = $('#all_commit_comments');
         var top_el = $('#files');
         bottom_el.html(markup + bottom_el.html());
