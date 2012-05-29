@@ -29,8 +29,10 @@ $(document).ready(function(){
         var hashstr = '?hashes=' + hashes.join(',');
         //strip https://github.com
         hashstr += '&pullrequest=' + location.href.substr(18);
-        links = $('table.commits tr .commit a').extend($('table.commits tr .message a'));
-        $.each(links, function(idx, el){
+        $.each($('table.commits tr .commit a'), function(idx, el){
+            el.href = el.href + hashstr;
+        });
+        $.each($('table.commits tr .message a'), function(idx, el){
             el.href = el.href + hashstr;
         });
 
