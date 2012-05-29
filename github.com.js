@@ -45,6 +45,7 @@ $(document).ready(function(){
         var idx = hashes.indexOf(current_commit);
         var prev = '';
         var next = '';
+        var info = '<p class="bubble"><strong>commit ' + (idx + 1) + '/' + hashes.length + '</strong><p>';
         if(idx > 0){
             prev = '<a href="../commit/' + hashes[idx-1] + location.search + '" class="minibutton" style="float: left;">&lt; go to previous commit</a>';
         }
@@ -52,11 +53,12 @@ $(document).ready(function(){
             next = '<a href="../commit/' + hashes[idx+1] + location.search + '" class="minibutton" style="float: right;">go to next commit &gt;</a>';
         }
         var up = '<a href="' + vars['pullrequest'] + '" class="minibutton" style="text-align: center; display:block; width: 10em; margin: 0 auto;">back to pullrequest</a>';
-        var markup = '<div style="margin: 1em 0; text-align:center;">' + prev + next + up +  '<p style="margin: 0; clear:both">&nbsp;</p></div>';
+        var topmarkup = '<div style="margin: 1em 0; text-align:center;">' + info + prev + next + up +  '<p style="margin: 0; clear:both">&nbsp;</p></div>';
+        var bottommarkup = '<div style="margin: 1em 0; text-align:center;">' + prev + next + up +  '<p style="margin: 0; clear:both">&nbsp;</p></div>';
         var bottom_el = $('#all_commit_comments');
         var top_el = $('#files');
-        bottom_el.html(markup + bottom_el.html());
-        top_el.html(markup + top_el.html());
+        bottom_el.html(bottommarkup + bottom_el.html());
+        top_el.html(topmarkup + top_el.html());
 
         $.each($('form'), function(idx, el){
             el = $(el);
