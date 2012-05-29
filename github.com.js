@@ -47,12 +47,12 @@ $(document).ready(function(){
         var next = '';
         var info = '<p class="bubble"><strong>commit ' + (idx + 1) + '/' + hashes.length + '</strong><p>';
         if(idx > 0){
-            prev = '<a href="../commit/' + hashes[idx-1] + location.search + '" class="minibutton" style="float: left;">&lt; go to previous commit</a>';
+            prev = '<a href="../commit/' + hashes[idx-1] + location.search + '" accesskey="p" class="minibutton" style="float: left;">&lt; go to previous commit</a>';
         }
         if(idx < hashes.length - 1){
-            next = '<a href="../commit/' + hashes[idx+1] + location.search + '" class="minibutton" style="float: right;">go to next commit &gt;</a>';
+            next = '<a href="../commit/' + hashes[idx+1] + location.search + '" accesskey="n" class="minibutton" style="float: right;">go to next commit &gt;</a>';
         }
-        var up = '<a href="' + vars['pullrequest'] + '" class="minibutton" style="text-align: center; display:block; width: 10em; margin: 0 auto;">back to pullrequest</a>';
+        var up = '<a href="' + vars['pullrequest'] + '" accesskey="b" class="minibutton" style="text-align: center; display:block; width: 10em; margin: 0 auto;">back to pullrequest</a>';
         var topmarkup = '<div style="margin: 1em 0; text-align:center;">' + info + prev + next + up +  '<p style="margin: 0; clear:both">&nbsp;</p></div>';
         var bottommarkup = '<div style="margin: 1em 0; text-align:center;">' + prev + next + up +  '<p style="margin: 0; clear:both">&nbsp;</p></div>';
         var bottom_el = $('#all_commit_comments');
