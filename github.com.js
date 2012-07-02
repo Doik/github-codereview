@@ -23,7 +23,7 @@ $(document).ready(function(){
     if(location.href.match('/pull/[0-9]+')){
         $.each($('.commit-list-comment table.commits tr'), function(idx, el){
             el = $(el);
-            var shortlink = el.find('.commit a')[0];
+            var shortlink = el.find('.commit-meta a')[0];
             hashes.push(shortlink.text);
         });
         var hashstr = '?hashes=' + hashes.join(',');
