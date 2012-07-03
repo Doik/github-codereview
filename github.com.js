@@ -23,13 +23,13 @@ $(document).ready(function(){
     if(location.href.match('/pull/[0-9]+')){
         $.each($('.commit-list-comment table.commits tr'), function(idx, el){
             el = $(el);
-            var shortlink = el.find('.commit-meta a')[0];
+            var shortlink = el.find('.commit-meta code a')[0];
             hashes.push(shortlink.text);
         });
         var hashstr = '?hashes=' + hashes.join(',');
         //strip https://github.com
         hashstr += '&pullrequest=' + location.href.substr(18);
-        $.each($('table.commits tr .commit a'), function(idx, el){
+        $.each($('table.commits tr .commit-meta code a'), function(idx, el){
             el.href = el.href + hashstr;
         });
         $.each($('table.commits tr .message a'), function(idx, el){
