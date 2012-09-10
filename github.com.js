@@ -21,7 +21,7 @@ $(document).ready(function(){
     var links = [];
     var hashes = [];
     if(location.href.match('/pull/[0-9]+')){
-        $.each($('.commit-list-comment table.commits tr'), function(idx, el){
+        $.each($('#commits_bucket table.commits tr'), function(idx, el){
             el = $(el);
             var shortlink = el.find('.commit-meta code a')[0];
             hashes.push(shortlink.text);
