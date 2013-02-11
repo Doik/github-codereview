@@ -11,6 +11,47 @@ function getUrlVars() {
     return vars;
 }
 
+function insertPullRequestFilter(){
+    var loggedInUser = $('#user-links a.name').text().trim();
+    var pullRequests = {};
+    $.get('https://api.github.com/repos'+window.location.pathname, function(data){
+        for(var i = 0; i < data.length; i++){
+            if(data[i].assignee == loggedInUser){
+                pullRequests[data[i].number] = data;
+            }
+        }
+    });
+    var myPulls = [];
+    var tabList = $('ul.list-browser-filter-tabs');
+    //$('a', tabList).add
+    var newTab = $('<li>');
+    var tabLink = $('<a>').attr('href', '#mine').attr('class', 'filter-tab custom-pr-assignee-filter').text('Assigned to me');
+    newTab.append(tabLink);
+    tabList.append(newTab);
+    newTab.click(function(event){
+        $('a', tabList).removeClass('selected');
+        tabLink.addClass('selected');
+        tabLink.bind("destroyed", insertPullRequestFilter);
+        var listObject = $('div.pulls-list');
+        if(jQuery.isEmptyObject(pullRequests)){
+            listObject.html('<div class="none"><p>No pull requests to show</p></div>');
+        } else {
+            $.get(window.location.pathname+'?direction=desc&page=1&sort=created&state=open', function(data){
+                var result = $(data);
+                var container = $('div.pulls-list', result);
+                var items = $('div.pulls-list div.list-browser-item');
+                $.each(items, function(idx, pr){
+                    var id = $('a.js-navigation-open', pr).attr('href').split('/').slice(-1)[0];
+                    if(!(id in pullRequests)){
+                        pr.remove();
+                    }
+                });
+                $('div.js-repo-pjax-container').html(result);
+            });
+        }
+    });
+
+}
 
 
 $(document).ready(function(){
@@ -36,6 +77,21 @@ $(document).ready(function(){
             el.href = el.href + hashstr;
         });
 
+    } else if(window.location.pathname.split('/').slice(-1)[0] == 'pulls'){
+        var pullRequests = {};
+        // first, check if we're on an open repo:)
+        if($('span.repo-label').text() != "private") {
+
+            jQuery.ajaxSetup({global:true});
+            $(document).ajaxComplete(function() {
+              console.log('ajax complete');
+              if(!$('a.custom-pr-assignee-filter').length){
+                insertPullRequestFilter();
+              }
+            });
+            insertPullRequestFilter();
+
+        }
     }
 
     if(location.href.match('/commit/') && location.search.match('hashes=')){
