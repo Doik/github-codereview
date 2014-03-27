@@ -1,5 +1,4 @@
 
-
 function getUrlVars() {
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
@@ -12,33 +11,41 @@ function getUrlVars() {
 }
 
 
-
 $(document).ready(function(){
+    if(location.href.match('/commit/') && location.search.match('hashes=')){
+        insertButtons();
+    }
 
     // var timetag = $('body.page-commit-show time.js-relative-date');
     // var time = timetag.attr('title');
 
-    var links = [];
-    var hashes = [];
     if(location.href.match('/pull/[0-9]+')){
-        $.each($('#commits_bucket table.commits tr'), function(idx, el){
+        var links = [];
+        var hashes = [];
+        $.each($('.timeline-commits tr'), function(idx, el){
             el = $(el);
-            var shortlink = el.find('.commit-meta code a')[0];
-            hashes.push(shortlink.text);
+            if(el.is(':visible')){
+                var shortlink = el.find('.commit-meta code a');
+                if(shortlink){
+                    hashes.push(shortlink.text());
+                }
+            }
         });
         var hashstr = '?hashes=' + hashes.join(',');
         //strip https://github.com
         hashstr += '&pullrequest=' + location.href.substr(18);
-        $.each($('table.commits tr .commit-meta code a'), function(idx, el){
+        $.each($('.timeline-commits tr .commit-message code a'), function(idx, el){
             el.href = el.href + hashstr;
+            $(el).queue('click', insertButtons);
         });
-        $.each($('table.commits tr .message a'), function(idx, el){
+        $.each($('.timeline-commits tr .commit-meta code a'), function(idx, el){
             el.href = el.href + hashstr;
+            $(el).queue('click', insertButtons);
         });
 
     }
 
-    if(location.href.match('/commit/') && location.search.match('hashes=')){
+function insertButtons(){
         var vars = getUrlVars();
         hashes = vars['hashes'].split(',');
         var current_commit = $('.full-commit .commit-meta.clearfix .sha-block span.sha').text().substr(0, hashes[0].length);
@@ -66,6 +73,6 @@ $(document).ready(function(){
                 el.attr('action', el.attr('action') + location.search);
             }
         });
-    }
+}
 
 });
