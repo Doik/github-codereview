@@ -5,13 +5,11 @@ github-codereview
 
 This will add ``next commit``, ``previous commit``, ``back to pull request`` links to the site if you're reviewing a pull request. 
 
-Basically, if you visit the overview of the pull request, it will add an array of all commit hashes to all links that point to single commits. If you follow one of the links, it will obtain the next and previous commit hashes from this array. It's not very elegant, but it does the job ;)   
+Additionally, thanks to @witsch you can access these links via `n`, `p` and `b` access keys.
 
+Basically, if you visit the overview of the pull request, it will add an array of all commit hashes to all links that point to single commits. If you follow one of the links, it will obtain the next and previous commit hashes from this array. It's not very elegant, but it does the job ;)
 
-Known current issues
-=================
-1. does only work on the shorthash links in the pullrequest
-
+Since the last update, this also works for the recently introduced partial-loading approach.
 
 How to install
 =================
