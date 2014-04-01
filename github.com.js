@@ -55,7 +55,7 @@ function( $ ){
             if(el.is(':visible')){
                 var shortlink = el.find('.commit-meta code a');
                 if(shortlink){
-                    hashes.push(shortlink.text());
+                    hashes.push(shortlink.attr('href').split('/').reverse()[0]);
                 }
             }
         });
