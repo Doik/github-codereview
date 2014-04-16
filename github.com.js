@@ -74,7 +74,12 @@ function( $ ){
             up_url = vars['pullrequest'];
         }
         else {
-            up_url = pullrequest_url;
+            if(pullrequest_url){
+                up_url = pullrequest_url;
+            } else {
+                var vars = getUrlVars();
+                up_url = vars['pullrequest'];
+            }
         }
         if(current_commit == window.location.pathname)
             return;
@@ -85,7 +90,9 @@ function( $ ){
         if(!bottom_el.length || !top_el.length){
             return
         }
-
+        if($('#dom_modified_by_dotjs_helper').length){
+            return;
+        }
         current_commit = window.location.pathname;
         var current_commit_hash = window.location.pathname.split('/').reverse()[0].substr(0, hashes[0].length);
         var idx = hashes.indexOf(current_commit_hash);
