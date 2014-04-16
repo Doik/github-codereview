@@ -29,25 +29,18 @@ function( $ ){
         return vars;
     }
 
-    function insertAjaxButtons(event){
-        if(window.location.pathname.match('/commit/')){
-            insertButtons();
-        }
-    }
-
     if(window.location.pathname.match('/commit/') && window.location.search.match('hashes=')){
         insertButtons();
-    }
-
-    if(window.location.pathname.match('/pull/[0-9]+$')){
-
-        pullrequest_url = window.location.pathname;
-
         $('[data-pjax-container]').bind('DOMSubtreeModified', function(event){
             if(window.location.href.match('/commit/')){
                 insertButtons();
             }
         });
+    }
+
+    if(window.location.pathname.match('/pull/[0-9]+$')){
+
+        pullrequest_url = window.location.pathname;
 
         var links = [];
         $.each($('.timeline-commits tr'), function(idx, el){
@@ -105,7 +98,7 @@ function( $ ){
         if(idx < hashes.length - 1){
             next = '<a href="../commit/' + hashes[idx+1] + window.location.search + '" data-pjax="true" accesskey="n" class="minibutton" style="float: right;">go to next commit &gt;</a>';
         }
-        var up = '<a href="' + decodeURIComponent(up_url) + '" accesskey="b" class="minibutton" style="text-align: center; display:block; width: 10em; margin: 0 auto;">back to pullrequest</a>';
+        var up = '<a href="' + decodeURIComponent(up_url) + '" accesskey="b" class="minibutton" style="text-align: center; display:block; width: 11em; margin: 0 auto;">back to pullrequest</a>';
         var topmarkup = '<div style="margin: 1em 0; text-align:center;">' + info + prev + next + up +  '<p style="margin: 0; clear:both">&nbsp;</p></div>';
         var bottommarkup = '<div style="margin: 1em 0; text-align:center;">' + prev + next + up +  '<p style="margin: 0; clear:both">&nbsp;</p></div>';
         top_el.html(topmarkup + top_el.html());
