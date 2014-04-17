@@ -42,6 +42,12 @@ function( $ ){
 
         pullrequest_url = window.location.pathname;
 
+        $('[data-pjax-container]').bind('DOMSubtreeModified', function(event){
+            if(window.location.href.match('/commit/')){
+                insertButtons();
+            }
+        });
+
         var links = [];
         $.each($('.timeline-commits tr'), function(idx, el){
             el = $(el);
