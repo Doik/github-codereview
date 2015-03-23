@@ -104,16 +104,17 @@ function( $ ){
         var idx = hashes.indexOf(current_commit_hash);
         var prev = '';
         var next = '';
-        var info = '<p id="dom_modified_by_dotjs_helper" class="bubble"><strong>commit ' + (idx + 1) + '/' + hashes.length + '</strong><p>';
+        var info = '<h3 id="dom_modified_by_dotjs_helper" style="text-align:center">commit ' + (idx + 1) + '/' + hashes.length + '</h3>';
         if(idx > 0){
-            prev = '<a href="../commit/' + hashes[idx-1] + window.location.search + '" data-pjax="true" accesskey="p" class="minibutton" style="float: left;">&lt; go to previous commit</a>';
+            prev = '<a href="../commit/' + hashes[idx-1] + window.location.search + '" data-pjax="true" accesskey="p" class="btn btn-sm" style="float: left;">&lt; go to previous commit</a>';
         }
         if(idx < hashes.length - 1){
-            next = '<a href="../commit/' + hashes[idx+1] + window.location.search + '" data-pjax="true" accesskey="n" class="minibutton" style="float: right;">go to next commit &gt;</a>';
+            next = '<a href="../commit/' + hashes[idx+1] + window.location.search + '" data-pjax="true" accesskey="n" class="btn btn-sm" style="float: right;">go to next commit &gt;</a>';
         }
-        var up = '<a href="' + decodeURIComponent(up_url) + '" accesskey="b" class="minibutton" style="text-align: center; display:block; width: 11em; margin: 0 auto;">back to pullrequest</a>';
-        var topmarkup = '<div style="margin: 1em 0; text-align:center;">' + info + prev + next + up +  '<p style="margin: 0; clear:both">&nbsp;</p></div>';
-        var bottommarkup = '<div style="margin: 1em 0; text-align:center;">' + prev + next + up +  '<p style="margin: 0; clear:both">&nbsp;</p></div>';
+        var up = '<a href="' + decodeURIComponent(up_url) + '" accesskey="b" class="btn btn-sm" style="text-align: center; display:block; width: 11em; margin: 0 auto;">back to pullrequest</a>';
+        var links = '<div class="boxed-group-inner"><p>' + prev + next + up + '</p></div>';
+        var topmarkup = '<div class="boxed-group style="text-align:center">' + info + links +  '<p style="margin: 0; clear:both">&nbsp;</p></div>';
+        var bottommarkup = '<div class="boxed-group" style="text-align:center;">' + links +  '<p style="margin: 0; clear:both">&nbsp;</p></div>';
         top_el.html(topmarkup + top_el.html());
         bottom_el.html(bottommarkup + bottom_el.html());
 
