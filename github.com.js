@@ -34,6 +34,8 @@ function( $ ){
         $('[data-pjax-container]').bind('DOMSubtreeModified', function(event){
             if(window.location.href.match('/commit/')){
                 insertButtons();
+            } else if(!window.location.href.match('/(commit|pull)/')){
+                hashes = [];
             }
         });
     }
@@ -45,6 +47,8 @@ function( $ ){
         $('[data-pjax-container]').bind('DOMSubtreeModified', function(event){
             if(window.location.href.match('/commit/')){
                 insertButtons();
+            } if(!window.location.href.match('/(commit|pull)/')){
+                hashes = [];
             }
         });
 
@@ -76,6 +80,9 @@ function( $ ){
         var up_url;
         if(hashes.length == 0){
             var vars = getUrlVars();
+            if(!vars['hashes']){
+                return;
+            }
             hashes = vars['hashes'].split(',');
             up_url = vars['pullrequest'];
         }
