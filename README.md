@@ -1,7 +1,9 @@
 github-codereview
 =================
 
-**A dotjs-based solution for improving code-reviews on pull requests.**
+**Obsoleted by the latest github update, thus not maintained anymore**
+
+A dotjs-based solution for improving code-reviews on pull requests.
 
 This will add ``next commit``, ``previous commit``, ``back to pull request`` links to the site if you're reviewing a pull request. 
 
